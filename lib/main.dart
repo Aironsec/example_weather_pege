@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -25,7 +27,7 @@ class WeatherPage extends StatelessWidget {
             ),
           ),
         ),
-        body: Padding(
+        body: SingleChildScrollView(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
@@ -42,15 +44,53 @@ class WeatherPage extends StatelessWidget {
   }
 }
 
-Padding _futureWeather() {
-  return Padding(
-    padding: const EdgeInsets.only(top: 48),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Text(
-          '7-DAY WEATHER FORECST',
-          style: TextStyle(color: Colors.white70, fontSize: 20),
+Column _futureWeather() {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      const SizedBox(height: 48),
+      const Text(
+        '7-DAY WEATHER FORECST',
+        style: TextStyle(color: Colors.white70, fontSize: 20),
+      ),
+      SizedBox(
+        height: 120,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: [
+            _listItem(),
+            _listItem(),
+            _listItem(),
+            _listItem(),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
+Container _listItem() {
+  return Container(
+    margin: const EdgeInsets.all(8.0),
+    width: 150,
+    color: Colors.red[200],
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        const Text(
+          'Friday',
+          style: TextStyle(color: Colors.white70, fontSize: 25),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              '14 °C',
+              style: TextStyle(color: Colors.white70, fontSize: 30),
+            ),
+            const SizedBox(width: 10),
+            const Icon(Icons.wb_sunny, color: Colors.white, size: 50),
+          ],
         ),
       ],
     ),
@@ -160,7 +200,7 @@ Row _propirtiesWeather() {
         children: const [
           Icon(Icons.air, color: Colors.white, size: 30),
           Text(
-            '',
+            '1',
             style: TextStyle(color: Colors.white70, fontSize: 20),
           ),
           Text(
