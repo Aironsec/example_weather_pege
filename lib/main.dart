@@ -27,72 +27,47 @@ class WeatherPage extends StatelessWidget {
             ),
           ),
         ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              _searchCity(),
-              _cityName(),
-              _currentWeather(),
-              _propirtiesWeather(),
-              _futureWeather(),
-            ],
-          ),
-        ),
+        body: _body(),
       ),
     );
   }
 }
 
-Column _futureWeather() {
-  return Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      const SizedBox(height: 48),
-      const Text(
-        '7-DAY WEATHER FORECST',
-        style: TextStyle(color: Colors.white70, fontSize: 20),
-      ),
-      SizedBox(
-        height: 120,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-            _listItem(),
-            _listItem(),
-            _listItem(),
-            _listItem(),
-          ],
-        ),
-      ),
-    ],
+SingleChildScrollView _body() {
+  return SingleChildScrollView(
+    padding: const EdgeInsets.all(8.0),
+    child: Column(
+      children: [
+        _searchCity(),
+        _cityName(),
+        const SizedBox(height: 48),
+        _currentWeather(),
+        const SizedBox(height: 48),
+        _propirtiesWeather(),
+        const SizedBox(height: 48),
+        _futureWeather(),
+      ],
+    ),
   );
 }
 
-Container _listItem() {
-  return Container(
-    margin: const EdgeInsets.all(8.0),
-    width: 150,
-    color: Colors.red[200],
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        const Text(
-          'Friday',
-          style: TextStyle(color: Colors.white70, fontSize: 25),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              '14 °C',
-              style: TextStyle(color: Colors.white70, fontSize: 30),
-            ),
-            const SizedBox(width: 10),
-            const Icon(Icons.wb_sunny, color: Colors.white, size: 50),
-          ],
-        ),
-      ],
+TextField _searchCity() {
+  return const TextField(
+    decoration: InputDecoration(
+      icon: Icon(
+        Icons.search,
+        size: 30,
+        color: Colors.white70,
+      ),
+      labelText: 'Enter City Name',
+      labelStyle: TextStyle(
+        color: Colors.white70,
+      ),
+      border: InputBorder.none,
+    ),
+    style: TextStyle(
+      color: Colors.white70,
+      fontSize: 20,
     ),
   );
 }
@@ -119,50 +94,26 @@ Column _cityName() {
   );
 }
 
-TextField _searchCity() {
-  return const TextField(
-    decoration: InputDecoration(
-      icon: Icon(
-        Icons.search,
-        size: 30,
-        color: Colors.white70,
-      ),
-      labelText: 'Enter City Name',
-      labelStyle: TextStyle(
-        color: Colors.white70,
-      ),
-      border: InputBorder.none,
-    ),
-    style: TextStyle(
-      color: Colors.white70,
-      fontSize: 20,
-    ),
-  );
-}
-
-Padding _currentWeather() {
-  return Padding(
-    padding: const EdgeInsets.only(top: 48, bottom: 48),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Icon(Icons.wb_sunny, color: Colors.white, size: 60),
-        const SizedBox(width: 20),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            Text(
-              '14 °C',
-              style: TextStyle(fontSize: 50, color: Colors.white70),
-            ),
-            Text(
-              'LIGHT SNOW',
-              style: TextStyle(fontSize: 18, color: Colors.white70),
-            )
-          ],
-        )
-      ],
-    ),
+Row _currentWeather() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      const Icon(Icons.wb_sunny, color: Colors.white, size: 60),
+      const SizedBox(width: 20),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: const [
+          Text(
+            '14 °C',
+            style: TextStyle(fontSize: 50, color: Colors.white70),
+          ),
+          Text(
+            'LIGHT SNOW',
+            style: TextStyle(fontSize: 18, color: Colors.white70),
+          )
+        ],
+      )
+    ],
   );
 }
 
@@ -210,5 +161,54 @@ Row _propirtiesWeather() {
         ],
       ),
     ],
+  );
+}
+
+Column _futureWeather() {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      const Text(
+        '7-DAY WEATHER FORECST',
+        style: TextStyle(color: Colors.white70, fontSize: 20),
+      ),
+      SizedBox(
+        height: 120,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: [
+            _listItem(),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
+Container _listItem() {
+  return Container(
+    margin: const EdgeInsets.all(8.0),
+    width: 150,
+    color: Colors.red[200],
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        const Text(
+          'Friday',
+          style: TextStyle(color: Colors.white70, fontSize: 25),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              '14 °C',
+              style: TextStyle(color: Colors.white70, fontSize: 30),
+            ),
+            const SizedBox(width: 10),
+            const Icon(Icons.wb_sunny, color: Colors.white, size: 50),
+          ],
+        ),
+      ],
+    ),
   );
 }
