@@ -186,6 +186,9 @@ Column _futureWeather() {
 }
 
 Container _listItem() {
+  var now = DateTime.now();
+  var listDate = List.generate(7, (i) => '${now.add(Duration(days: i))}');
+
   return Container(
     margin: const EdgeInsets.all(8.0),
     width: 150,
@@ -193,9 +196,9 @@ Container _listItem() {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const Text(
-          'Friday',
-          style: TextStyle(color: Colors.white70, fontSize: 25),
+        Text(
+          listDate[0],
+          style: const TextStyle(color: Colors.white70, fontSize: 25),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
