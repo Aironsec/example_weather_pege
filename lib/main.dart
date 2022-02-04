@@ -1,6 +1,5 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const WeatherPage());
@@ -186,6 +185,10 @@ Column _futureWeather() {
 }
 
 Container _listItem() {
+  final now = DateTime.now();
+  final weekDays = List.generate(7,
+      (i) => DateFormat(DateFormat.WEEKDAY).format(now.add(Duration(days: i))));
+
   return Container(
     margin: const EdgeInsets.all(8.0),
     width: 150,
@@ -193,19 +196,19 @@ Container _listItem() {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const Text(
-          'Friday',
-          style: TextStyle(color: Colors.white70, fontSize: 25),
+        Text(
+          weekDays[0],
+          style: const TextStyle(color: Colors.white70, fontSize: 25),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
+          children: const [
+            Text(
               '14 °C',
               style: TextStyle(color: Colors.white70, fontSize: 30),
             ),
-            const SizedBox(width: 10),
-            const Icon(Icons.wb_sunny, color: Colors.white, size: 50),
+            SizedBox(width: 10),
+            Icon(Icons.wb_sunny, color: Colors.white, size: 50),
           ],
         ),
       ],
