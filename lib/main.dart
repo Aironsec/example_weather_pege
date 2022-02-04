@@ -173,22 +173,25 @@ Column _futureWeather() {
       ),
       SizedBox(
         height: 120,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-            _listItem(),
-          ],
-        ),
+        child: _listView(),
       ),
     ],
   );
 }
 
-Container _listItem() {
-  final now = DateTime.now();
-  final weekDays = List.generate(7,
-      (i) => DateFormat(DateFormat.WEEKDAY).format(now.add(Duration(days: i))));
+final now = DateTime.now();
+final weekDays = List.generate(7,
+    (i) => DateFormat(DateFormat.WEEKDAY).format(now.add(Duration(days: i))));
 
+ListView _listView() {
+  return ListView.builder(
+    scrollDirection: Axis.horizontal,
+    itemCount: weekDays.length,
+    itemBuilder: (context, index) => _listItem(index),
+  );
+}
+
+Container _listItem(int index) {
   return Container(
     margin: const EdgeInsets.all(8.0),
     width: 150,
@@ -197,7 +200,7 @@ Container _listItem() {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(
-          weekDays[0],
+          weekDays[index],
           style: const TextStyle(color: Colors.white70, fontSize: 25),
         ),
         Row(
